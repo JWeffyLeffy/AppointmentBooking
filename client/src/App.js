@@ -31,7 +31,7 @@ const App = () => {
     const fetchUserData = async (token) => {
         try {
             // Fetch the user's data from the backend using the provided token
-            const response = await fetch("http://localhost:5000/api/users/me", {
+            const response = await fetch("https://appointmentbooking-ae9c.onrender.com/api/users/me", {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -54,7 +54,7 @@ const App = () => {
             // Make a POST request to the backend with the email and password
             // to log in the user
             const response = await fetch(
-                "http://localhost:5000/api/users/login",
+                "https://appointmentbooking-ae9c.onrender.com/api/users/login",
                 {
                     method: "POST",
                     headers: {
@@ -87,7 +87,7 @@ const App = () => {
             // Make a POST request to the backend with the name, email, and password
             // to register a new user
             const response = await fetch(
-                "http://localhost:5000/api/users/register",
+                "https://appointmentbooking-ae9c.onrender.com/api/users/register",
                 {
                     method: "POST",
                     headers: {
