@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: `./.env.${process.env.NODE_ENV}` });
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -28,7 +28,7 @@ app.use("/doctors", doctorsRouter);
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URL, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

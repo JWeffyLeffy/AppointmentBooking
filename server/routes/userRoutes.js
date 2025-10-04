@@ -44,7 +44,7 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
 
     // Create and return a JWT token
-    const token = jwt.sign({ userId: user._id }, 'javedansari');
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.status(200).json({ token });
   } catch (error) {
     res.status(500).json({ message: 'An error occurred' });
@@ -62,7 +62,7 @@ router.get('/me', async (req, res) => {
     }
 
     // Verify the token and decode the user ID
-    const decoded = jwt.verify(token, 'javedansari');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.userId;
 
     // Find the user in the database
