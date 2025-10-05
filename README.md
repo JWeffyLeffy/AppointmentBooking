@@ -35,11 +35,11 @@ This project uses the following technologies:
 - **Database**: MongoDB
 - **Email Service**: Nodemailer with Gmail
 - **Containerization**: Docker, Docker Compose
-- **Deployment**: Heroku (or any other cloud service)
 
 ## Getting Started
 
 To get started with the Appointment Booking App, follow these steps:
+
 
 ### Prerequisites
 
@@ -196,6 +196,8 @@ AppointmentBooking/
 - **middleware/**: Middleware functions for request processing.
 - **models/**: Database schemas.
 - **routes/**: API routes.
+
+
 
 ## API Endpoints
 
