@@ -57,9 +57,7 @@ const createAppointment = async (req, res) => {
 
     // Send confirmation emails to the doctor and user
     const transporter = nodemailer.createTransport({
-      // Configure your email provider settings here
-      // Example using Gmail SMTP:
-      service: "gmail",
+      service: process.env.EMAIL_SERVICE,
       auth: {
         user: process.env.GMAIL,
         pass: process.env.APP_PASSWORD,

@@ -9,6 +9,7 @@ Welcome to the **Appointment Booking App**! This full-stack MERN application all
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
 - [API Endpoints](#api-endpoints)
@@ -33,61 +34,120 @@ This project uses the following technologies:
 - **Backend**: Node.js, Express
 - **Database**: MongoDB
 - **Email Service**: Nodemailer with Gmail
-- **Deployment**: Heroku (or any other cloud service)
+- **Containerization**: Docker, Docker Compose
+
+
+
 
 ## Getting Started
 
 To get started with the Appointment Booking App, follow these steps:
 
-1. **Clone the repository**:
 
-   ```bash
-   git clone https://github.com/JWeffyLeffy/AppointmentBooking.git
-   ```
+### Prerequisites
 
-2. **Navigate to the project directory**:
+Ensure you have Docker and Docker Compose installed on your machine.
 
-   ```bash
-   cd AppointmentBooking
-   ```
+- [Install Docker](https://docs.docker.com/get-docker/)
+- [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-3. **Install dependencies**:
+### 1. Clone the repository:
 
-   For the backend:
+```bash
+git clone https://github.com/JWeffyLeffy/AppointmentBooking.git
+```
 
-   ```bash
-   cd backend
-   npm install
-   ```
+### 2. Navigate to the project directory:
 
-   For the frontend:
+```bash
+cd AppointmentBooking
+```
 
-   ```bash
-   cd ../frontend
-   npm install
-   ```
+### 3. Configure environment variables:
 
-4. **Set up environment variables**:
+Refer to the [Environment Variables](#environment-variables) section to set up the necessary `.env` files.
 
-   Create a `.env` file in the backend directory and add your MongoDB URI and email credentials.
+### 4. Build and run Docker containers:
 
-5. **Run the application**:
+From the project root, execute the following command to build images and start services:
 
-   For the backend:
+```bash
+docker-compose up --build
+```
 
-   ```bash
-   cd backend
-   npm start
-   ```
+This will start the `mongodb`, `server`, and `client` services.
 
-   For the frontend:
+### 5. Access the application:
 
-   ```bash
-   cd ../frontend
-   npm start
-   ```
+- The frontend will be available at: `http://localhost:3000`
+- The backend API will be available at: `http://localhost:5000`
 
-Now, you can access the application at `http://localhost:3000`.
+## Environment Variables
+
+This project uses environment variables to manage sensitive and environment-specific configurations.
+
+### Server (`server/`)
+
+Create `.env` files in the `server/` directory based on the `server/.env.example`.
+
+- **Development (`server/.env.development`)**: Used when `NODE_ENV` is `development`.
+
+```
+# .env.development for Server
+# Environment variables for development mode
+
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/appointmentbooking_dev
+JWT_SECRET=your_development_jwt_secret_key
+GMAIL=your_development_gmail_address@gmail.com
+APP_PASSWORD=your_development_gmail_app_password
+EMAIL_SERVICE=gmail
+NODE_ENV=development
+```
+
+- **Production (`server/.env.production`)**: Used when `NODE_ENV` is `production`.
+
+```
+# .env.production for Server
+# Environment variables for production mode
+
+PORT=5000
+MONGO_URI=your_production_mongodb_uri
+JWT_SECRET=your_production_jwt_secret_key
+GMAIL=your_production_gmail_address@gmail.com
+APP_PASSWORD=your_production_gmail_app_password
+EMAIL_SERVICE=gmail
+NODE_ENV=production
+```
+
+### Client (`client/`)
+
+The React client uses environment-specific `.env` files.
+
+- **Development (`client/.env.development`)**: Used when `NODE_ENV` is `development` (e.g., `npm start`).
+
+```
+# .env.development for Client
+# This file is used for development environment variables.
+
+# API URL for the backend server during development.
+# When running the client locally and the server locally or via docker-compose.
+REACT_APP_API_URL=http://localhost:5000
+```
+
+- **Production (`client/.env.production`)**: Used when `NODE_ENV` is `production` (e.g., `npm run build`).
+
+```
+# .env.production for Client
+# This file is used for production environment variables.
+
+# API URL for the backend server in production.
+# This should be the public URL where your backend API is accessible.
+# Example: REACT_APP_API_URL=https://api.yourdomain.com
+REACT_APP_API_URL=https://your-production-api-url.com
+```
+
+
 
 ## Usage
 
@@ -107,29 +167,41 @@ Once the application is running, you can:
 
 ## Folder Structure
 
-Here’s a quick overview of the folder structure:
+Here's a quick overview of the folder structure:
 
 ```
 AppointmentBooking/
-├── backend/
-│   ├── config/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── .env
-│   ├── server.js
-├── frontend/
+├── client/
 │   ├── public/
 │   ├── src/
+│   ├── Dockerfile
 │   ├── package.json
+│   ├── .env.development
+│   ├── .env.production
+├── server/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── Dockerfile
+│   ├── index.js
+│   ├── package.json
+│   ├── .env.example
+│   ├── .env.development
+│   ├── .env.production
+├── docker-compose.yml
+├── .gitignore
 ├── README.md
 ```
 
-- **backend/**: Contains the server-side code.
-- **frontend/**: Contains the client-side code.
-- **config/**: Configuration files for database and email services.
+- **client/**: Contains the client-side code.
+- **server/**: Contains the server-side code.
+- **docker-compose.yml**: Defines and runs the multi-container Docker application.
 - **controllers/**: Business logic for handling requests.
+- **middleware/**: Middleware functions for request processing.
 - **models/**: Database schemas.
+- **routes/**: API routes.
+
 
 ## API Endpoints
 

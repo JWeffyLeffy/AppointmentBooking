@@ -15,7 +15,7 @@ const Dashboard = ({ user, handleLogout }) => {
 
   useEffect(() => {
     axios
-      .get("https://appointmentbooking-ae9c.onrender.com/doctors")
+      .get(`${process.env.REACT_APP_API_URL}/doctors`)
       .then((response) => {
         setDoctors(response.data);
       })
@@ -57,7 +57,7 @@ const Dashboard = ({ user, handleLogout }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("https://appointmentbooking-ae9c.onrender.com/appointments", {
+      .post(`${process.env.REACT_APP_API_URL}/appointments`, {
         patientId: user._id,
         patientName: user.name,
         doctorId: selectedDoctor,
