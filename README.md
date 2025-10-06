@@ -36,6 +36,9 @@ This project uses the following technologies:
 - **Email Service**: Nodemailer with Gmail
 - **Containerization**: Docker, Docker Compose
 
+
+
+
 ## Getting Started
 
 To get started with the Appointment Booking App, follow these steps:
@@ -144,6 +147,8 @@ REACT_APP_API_URL=http://localhost:5000
 REACT_APP_API_URL=https://your-production-api-url.com
 ```
 
+
+
 ## Usage
 
 Once the application is running, you can:
@@ -196,7 +201,6 @@ AppointmentBooking/
 - **middleware/**: Middleware functions for request processing.
 - **models/**: Database schemas.
 - **routes/**: API routes.
-
 
 
 ## API Endpoints
