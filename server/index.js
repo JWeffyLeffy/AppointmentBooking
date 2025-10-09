@@ -1,11 +1,11 @@
-require('dotenv').config()
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const doctorsRouter = require("./routes/doctorRoutes");
 const userRoutes = require("./routes/userRoutes");
-const appontmentRoutes = require("./routes/appointmentRoutes");
+const appointmentRoutes = require("./routes/appointmentRoutes");
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -17,23 +17,27 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-// Register routes
+// --- Routes ---
 app.get("/", function (req, res) {
-  res.send("landing page add /doctor to get all doctors");
+  res.send("API landing page. Use specific routes to get data.");
 });
-app.use("/api/users", userRoutes);
-app.use("/appointments", appontmentRoutes);
-app.use("/doctors", doctorsRouter);
 
-// Connect to MongoDB
+// Use more specific API routes for clarity
+app.use("/api/users", userRoutes);
+app.use("/api/appointments", appointmentRoutes);
+app.use("/api/doctors", doctorsRouter);
+
+// --- Connect to MongoDB ---
+// **FIXED**: Changed process.env.MONGODB_URL to process.env.MONGO_URI
+// **UPDATED**: Removed deprecated Mongoose options
 mongoose
-  .connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    // --- Start the server only after a successful DB connection ---
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    console.log("Connected to MongoDB");
   })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.log(error));
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  .catch((error) => {
+    console.error("MongoDB connection error:", error);
+  });
