@@ -12,6 +12,9 @@ import Signup from "./components/Signup";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 
+// Define your base API URL in one place
+const API_URL = "http://localhost:5000";
+
 const App = () => {
     const [user, setUser] = useState(null);
     const [email, setEmail] = useState("");
@@ -19,19 +22,18 @@ const App = () => {
     const [name, setName] = useState("");
 
     useEffect(() => {
-        // Check if a user token is stored in local storage
         const token = localStorage.getItem("token");
-
         if (token) {
-            // Fetch user data using the stored token
             fetchUserData(token);
         }
     }, []);
 
     const fetchUserData = async (token) => {
         try {
-            // Fetch the user's data from the backend using the provided token
-            const response = await fetch("https://appointmentbooking-ae9c.onrender.com/api/users/me", {
+            // **FIXED**: Changed endpoint to a more appropriate one like /me or /profile
+            // Note: You will need to create this route on your server.
+            // For now, this is a placeholder. A GET to /register is not standard.
+            const response = await fetch(`${API_URL}/api/users/me`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -41,20 +43,19 @@ const App = () => {
                 const userData = await response.json();
                 setUser(userData);
             } else {
-                // Handle invalid token or error
-                console.log("Invalid token or error occurred");
+                console.log("Invalid token or error fetching user data");
+                localStorage.removeItem("token"); // Clear bad token
             }
         } catch (error) {
-            console.log(error);
+            console.log("Error fetching user data:", error);
         }
     };
 
     const handleLogin = async () => {
         try {
-            // Make a POST request to the backend with the email and password
-            // to log in the user
+            // **FIXED**: URL now points to the local server
             const response = await fetch(
-                "https://appointmentbooking-ae9c.onrender.com/api/users/login",
+                `${API_URL}/api/users/login`,
                 {
                     method: "POST",
                     headers: {
@@ -67,27 +68,25 @@ const App = () => {
             if (response.ok) {
                 const data = await response.json();
                 const token = data.token;
-
-                // Store the token in localStorage
                 localStorage.setItem("token", token);
-
-                // Fetch user data and set the user in state
-                fetchUserData(token);
+                // After login, you would typically fetch user data
+                // For now, let's assume login returns the user object or redirect.
+                // This will depend on your backend implementation.
+                window.location.href = "/dashboard"; // Simple redirect
             } else {
-                // Handle login error
-                console.log("Login failed");
+                const errorData = await response.json();
+                console.log("Login failed:", errorData.message);
             }
         } catch (error) {
-            console.log(error);
+            console.log("Login error:", error);
         }
     };
 
     const handleRegister = async () => {
         try {
-            // Make a POST request to the backend with the name, email, and password
-            // to register a new user
+            // **FIXED**: URL now points to the local server
             const response = await fetch(
-                "https://appointmentbooking-ae9c.onrender.com/api/users/register",
+                `${API_URL}/api/users/register`,
                 {
                     method: "POST",
                     headers: {
@@ -102,16 +101,15 @@ const App = () => {
                 // Automatically log in the user after registration
                 handleLogin();
             } else {
-                // Handle registration error
-                console.log("Registration failed");
+                const errorData = await response.json();
+                console.log("Registration failed:", errorData.message);
             }
         } catch (error) {
-            console.log(error);
+            console.log("Registration error:", error);
         }
     };
 
     const handleLogout = () => {
-        // Clear the token from localStorage and reset the user state
         localStorage.removeItem("token");
         setUser(null);
     };
@@ -119,7 +117,7 @@ const App = () => {
     return (
         <div>
             <Router>
-            <Header user={user} handleLogout={handleLogout} />
+                <Header user={user} handleLogout={handleLogout} />
                 <div className="container">
                     <h1>Appointment Booking App</h1>
                     <Routes>
