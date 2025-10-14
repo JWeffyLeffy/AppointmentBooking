@@ -1,5 +1,3 @@
-// routes/appointments.js
-const express = require("express");
 const Appointment = require("../models/Appointment");
 const Doctor = require("../models/Doctor");
 const User = require("../models/User");
@@ -49,7 +47,7 @@ const createAppointment = async (req, res) => {
     const savedAppointment = await appointment.save();
 
     // Update the doctor's availableSlots to mark the selected time slot as booked (selected: true)
-    const updatedDoctor = await Doctor.findOneAndUpdate(
+    await Doctor.findOneAndUpdate(
       { _id: doctorId, "availableSlots.day": date },
       { $set: { "availableSlots.$.timeSlots.$[elem].selected": true } },
       { arrayFilters: [{ "elem.slots": time }], new: true }
@@ -89,6 +87,8 @@ const createAppointment = async (req, res) => {
       appointment: savedAppointment,
     });
   } catch (error) {
+    // **THE FIX**: This line will print the hidden error to your terminal
+    console.error("ERROR BOOKING APPOINTMENT:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -96,3 +96,4 @@ const createAppointment = async (req, res) => {
 module.exports = {
   createAppointment,
 };
+

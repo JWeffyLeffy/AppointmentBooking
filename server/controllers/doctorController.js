@@ -1,9 +1,11 @@
-// controllers/doctorsController.js
 const Doctor = require("../models/Doctor");
 
 // Populate dummy data for doctors
 const populateDummyDoctors = async (req, res) => {
   try {
+    // Optional: First, delete any existing doctors to avoid duplicates
+    await Doctor.deleteMany({});
+    
     const dummyDoctors = [
       {
         name: "Javed Ansari",
@@ -105,6 +107,8 @@ const populateDummyDoctors = async (req, res) => {
     await Doctor.insertMany(dummyDoctors);
     res.json({ message: "Dummy doctors added successfully" });
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR POPULATING DUMMY DOCTORS:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -115,11 +119,13 @@ const getAllDoctors = async (req, res) => {
     const doctors = await Doctor.find();
     res.json(doctors);
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR GETTING ALL DOCTORS:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
-// Get doctor
-// GET /doctors/:id
+
+// Get doctor by ID
 const getAllDoctor = async (req, res) => {
   try {
     const doctor = await Doctor.findById(req.params.id);
@@ -128,6 +134,8 @@ const getAllDoctor = async (req, res) => {
     }
     res.json(doctor);
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR GETTING ONE DOCTOR:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -152,7 +160,7 @@ const selectTimeSlot = async (req, res) => {
     }, null);
 
     if (!timeSlot) {
-            return res.status(404).json({ error: "Time slot not found" });
+      return res.status(404).json({ error: "Time slot not found" });
     }
 
     timeSlot.selected = true;
@@ -161,6 +169,8 @@ const selectTimeSlot = async (req, res) => {
 
     res.json({ message: "Time slot selected successfully" });
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR SELECTING TIME SLOT:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -173,6 +183,8 @@ const getDoctorsWithSelectedSlots = async (req, res) => {
     });
     res.json(doctors);
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR GETTING SELECTED SLOTS:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -182,6 +194,8 @@ const deleteAllDoctors = async (req, res) => {
     await Doctor.deleteMany({});
     res.json({ message: "All doctors deleted successfully" });
   } catch (error) {
+    // **FIXED**: Added console.error to see the actual error
+    console.error("ERROR DELETING DOCTORS:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
